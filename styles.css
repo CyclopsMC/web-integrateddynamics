@@ -1,0 +1,36 @@
+body {
+  font: 400 16px/1.5 "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+}
+
+main {
+	margin: auto;
+	width: 600px;
+	text-align: center;
+}
+
+ul.links {
+	list-style: none;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+ul.links li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+ul.links li a {
+	text-decoration: none;
+}
+
+ul.links li:not(:first-child)::before {
+	content: ' | ';
+}
+
+.titleimg {
+	width: 300px;
+}
