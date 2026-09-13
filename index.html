@@ -1,50 +1,778 @@
 <!DOCTYPE html>
-<html>
-
-  <head prefix="foaf: http://xmlns.com/foaf/0.1/">
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="en">
+<head prefix="foaf: http://xmlns.com/foaf/0.1/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title property="schema:name">Integrated Dynamics</title>
-  <meta name="description" content="A Minecraft mod to take full and automated control of your appliances." />
+  <meta name="description" content="A Minecraft mod to take full and automated control of your appliances.">
+  <meta name="theme-color" content="#09171f">
 
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="canonical" href="https://integrateddynamics.rubensworks.net/" />
-  <link rel="shortcut icon" type="image/png" href="https://integrateddynamics.rubensworks.net/book/assets/icons/integrateddynamics__cable__0.png" />
-  <link rel="foaf:maker" href="https://www.rubensworks.net/#me" />
+  <link rel="canonical" href="https://integrateddynamics.rubensworks.net/">
+  <link rel="icon" type="image/png" href="/book/assets/icon/integrateddynamics__cable.png">
+  <link rel="foaf:maker" href="https://www.rubensworks.net/#me">
 
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4197493-14"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4CKF3Y3CH"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-4197493-14');
+    gtag('config', 'G-K4CKF3Y3CH');
   </script>
+
+  <style>
+:root {
+    --font-body: 'Open Sans', system-ui, sans-serif;
+    --font-heading: 'Lora', Georgia, serif;
+    --cover: #09171f;
+    --page: #e6d6ac;
+    --page-muted: color-mix(in srgb, var(--page) 88%, #4a3a1a);
+    --page-line: color-mix(in srgb, var(--accent) 45%, var(--page));
+    --ink: #2a2318;
+    --ink-muted: color-mix(in srgb, var(--ink) 60%, var(--page));
+    --heading: #16384c;
+    --accent: #3381ad;
+    --accent-light: #49b8f7;
+    --accent-muted: #9fcae3;
+    --frame: #49b8f7;
+    --link: #3381ad;
+    --link-hover: #16384c;
+    --button: #3381ad;
+    --button-border: #49b8f7;
+    --button-text: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    background-color: var(--cover);
+    background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.07), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.015) 0 2px, transparent 2px 6px);
+}
+
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--link-hover); }
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--heading);
+    line-height: 1.2;
+    margin: 0 0 0.5em;
+}
+
+img.pixel { image-rendering: pixelated; }
+
+/* ---------- Header ---------- */
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 14px 20px;
+}
+
+.site-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.site-brand:hover { color: #fff; }
+
+.site-brand img {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+}
+
+.site-nav a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+}
+
+.site-nav a:hover {
+    color: #fff;
+    border-bottom-color: var(--accent-light);
+}
+
+/* ---------- Hero, on the cover ---------- */
+
+.hero {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 20px 36px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero .logo {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
+}
+
+.hero h1 {
+    color: #fff;
+    font-size: 1.6rem;
+    margin: 20px auto 10px;
+    max-width: 24em;
+    text-wrap: balance;
+}
+
+.hero .intro {
+    margin: 0 auto 24px;
+    max-width: 38em;
+    font-size: 1.05rem;
+}
+
+.cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1.2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.button img { width: 24px; height: 24px; }
+
+.button-primary {
+    background: var(--button);
+    border: 2px solid var(--button-border);
+    color: var(--button-text);
+}
+
+.button-primary:hover {
+    color: var(--button-text);
+    background: color-mix(in srgb, var(--button) 85%, #fff);
+}
+
+.button-secondary {
+    background: var(--page);
+    border: 2px solid var(--frame);
+    color: var(--heading);
+}
+
+.button-secondary:hover {
+    color: var(--heading);
+    background: color-mix(in srgb, var(--page) 90%, #fff);
+}
+
+.release {
+    margin: 16px 0 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.release a { color: rgba(255, 255, 255, 0.8); }
+
+.release .badge {
+    display: inline-block;
+    padding: 0 6px;
+    margin-left: 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    vertical-align: 1px;
+}
+
+.requires {
+    margin: 18px 0 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.requires a { color: rgba(255, 255, 255, 0.85); }
+
+/* ---------- The sheet ---------- */
+
+.sheet-outer { padding: 0 16px 24px; }
+
+.sheet {
+    position: relative;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 28px 40px 32px;
+    background-color: var(--page);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    border: 3px solid var(--frame);
+    border-radius: 4px 10px 10px 4px;
+    box-shadow:
+        inset 0 0 0 1px color-mix(in srgb, var(--frame) 40%, var(--page)),
+        inset 0 0 60px color-mix(in srgb, #4a3a1a 12%, transparent),
+        0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Stitched right edge, as on the in-game page. */
+.sheet::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    right: 8px;
+    border-right: 2px dashed color-mix(in srgb, var(--accent) 55%, transparent);
+    pointer-events: none;
+}
+
+.sheet h2 {
+    font-size: 1.6rem;
+    margin: 0 0 4px;
+    text-align: center;
+}
+
+.sheet section + section { margin-top: 36px; }
+
+.ornament {
+    height: 12px;
+    margin: 4px 0 20px;
+    border: 0;
+    background-color: var(--accent);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' shape-rendering='crispEdges'%3E%3Crect x='0' y='5' width='40' height='2'/%3E%3Crect x='80' y='5' width='40' height='2'/%3E%3Crect x='6' y='3' width='2' height='6'/%3E%3Crect x='14' y='2' width='2' height='8'/%3E%3Crect x='22' y='3' width='2' height='6'/%3E%3Crect x='96' y='3' width='2' height='6'/%3E%3Crect x='104' y='2' width='2' height='8'/%3E%3Crect x='112' y='3' width='2' height='6'/%3E%3Cpath d='M60 1l5 5-5 5-5-5z'/%3E%3C/svg%3E") center / 120px 12px no-repeat, linear-gradient(#000, #000) left center / calc(50% - 60px) 2px no-repeat, linear-gradient(#000, #000) right center / calc(50% - 60px) 2px no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' shape-rendering='crispEdges'%3E%3Crect x='0' y='5' width='40' height='2'/%3E%3Crect x='80' y='5' width='40' height='2'/%3E%3Crect x='6' y='3' width='2' height='6'/%3E%3Crect x='14' y='2' width='2' height='8'/%3E%3Crect x='22' y='3' width='2' height='6'/%3E%3Crect x='96' y='3' width='2' height='6'/%3E%3Crect x='104' y='2' width='2' height='8'/%3E%3Crect x='112' y='3' width='2' height='6'/%3E%3Cpath d='M60 1l5 5-5 5-5-5z'/%3E%3C/svg%3E") center / 120px 12px no-repeat, linear-gradient(#000, #000) left center / calc(50% - 60px) 2px no-repeat, linear-gradient(#000, #000) right center / calc(50% - 60px) 2px no-repeat;
+}
+
+/* ---------- Features ---------- */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.features li {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 14px;
+    align-items: start;
+}
+
+.features img {
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.25));
+}
+
+.features h3 {
+    font-size: 1.1rem;
+    margin: 4px 0 4px;
+}
+
+.features p {
+    margin: 0;
+    font-size: 15px;
+    color: color-mix(in srgb, var(--ink) 85%, var(--page));
+}
+
+/* ---------- Download cards ---------- */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 14px 14px;
+    background: var(--page-muted);
+    border: 1px solid var(--page-line);
+    border-radius: 8px;
+}
+
+.card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px dotted var(--page-line);
+}
+
+.card h3 {
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.card h3 a { color: var(--heading); text-decoration: none; }
+.card h3 a:hover { text-decoration: underline; }
+
+.card p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.card .meta {
+    margin-top: auto;
+    padding-top: 6px;
+    font-size: 13px;
+    color: var(--ink-muted);
+}
+
+.card .meta .badge {
+    display: inline-block;
+    padding: 0 5px;
+    margin-left: 4px;
+    border-radius: 4px;
+    background: var(--accent-muted);
+    color: var(--heading);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.card-featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px 16px;
+}
+
+.card-featured .card-head { border: 0; padding: 0; }
+.card-featured .card-head img { width: 48px; height: 48px; }
+.card-featured h3 { font-size: 1.2rem; }
+.card-featured .meta { grid-column: 1 / -1; margin: 0; padding: 0; }
+.card-featured .versions { grid-column: 1 / -1; margin: 0; }
+
+.card-featured .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.button-small {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--button-border);
+    background: var(--button);
+    color: var(--button-text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.button-small:hover { color: var(--button-text); background: color-mix(in srgb, var(--button) 85%, #fff); }
+
+.button-small.ghost {
+    background: transparent;
+    color: var(--heading);
+    border-color: var(--accent);
+}
+
+.button-small.ghost:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--heading); }
+
+.versions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+}
+
+.versions li {
+    padding: 1px 8px;
+    border: 1px solid var(--page-line);
+    border-radius: 999px;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.versions li.more { border-style: dashed; }
+
+.versions li.label { border: 0; padding-left: 0; color: var(--ink); font-weight: 600; }
+
+.versions:empty { display: none; }
+
+/* ---------- Community ---------- */
+
+.community {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.community a {
+    display: block;
+    height: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--page-line);
+    border-radius: 8px;
+    background: var(--page-muted);
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.community a:hover { border-color: var(--accent); }
+
+.community strong {
+    display: block;
+    font-family: var(--font-heading);
+    color: var(--heading);
+    margin-bottom: 2px;
+}
+
+.community span { font-size: 14px; color: var(--ink-muted); }
+
+/* ---------- Footer ---------- */
+
+footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 8px 20px 40px;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+footer a { color: rgba(255, 255, 255, 0.75); }
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 640px) {
+    .site-header { justify-content: center; }
+    .hero { padding-top: 16px; }
+    .hero h1 { font-size: 1.35rem; }
+    .sheet { padding: 22px 18px 24px; }
+    .sheet::after { right: 5px; }
+    .cta .button { width: 100%; justify-content: center; }
+    .card-featured { grid-template-columns: 1fr; }
+}
+
+/* ---------- Large screens ---------- */
+
+@media (min-width: 1700px) { body { zoom: 1.25; } }
+@media (min-width: 2400px) { body { zoom: 1.6; } }
+@media (min-width: 3200px) { body { zoom: 2; } }
+  </style>
 </head>
 <body typeof="schema:VideoGame">
-	<main>
-		<ul class="links">
-			<li><a href="https://integrateddynamics.rubensworks.net/book/">Book</a></li>
-			<li><a href="https://discord.gg/9yDxubB">Discord</a></li>
-			<li><a property="schema:codeRepository" href="https://github.com/CyclopsMC/IntegratedDynamics">GitHub</a></li>
-			<li><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-dynamics">CurseForge</a></li>
-			<li><a href="https://patreon.com/kroeser">Patreon</a></li>
-		</ul>
+    <header class="site-header">
+        <a class="site-brand" href="https://integrateddynamics.rubensworks.net/">
+            <img class="pixel" src="/book/assets/icon/integrateddynamics__cable.png" alt="" width="32" height="32">
+            Integrated Dynamics
+        </a>
+        <ul class="site-nav">
+            <li><a href="https://integrateddynamics.rubensworks.net/book/">Book</a></li>
+            <li><a href="https://discord.gg/9yDxubB">Discord</a></li>
+            <li><a property="schema:codeRepository" href="https://github.com/CyclopsMC/IntegratedDynamics">GitHub</a></li>
+            <li><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-dynamics">CurseForge</a></li>
+            <li><a href="https://patreon.com/kroeser">Patreon</a></li>
+        </ul>
+    </header>
 
-		<img src="logo.png" alt="Integrated Dynamics" title="Integrated Dynamics" class="titleimg" />
-		<h1>A Minecraft mod to take full and automated control of your appliances</h1>
-		<p>Requires the <a href="https://www.curseforge.com/minecraft/mc-mods/cyclops-core">Cyclops Core</a> and <a href="https://www.curseforge.com/minecraft/mc-mods/common-capabilities">Common Capabilities</a> libraries.</p>
+    <main>
+        <section class="hero" data-project="integrated-dynamics">
+            <img class="logo" src="logo.png" alt="Integrated Dynamics" width="300">
+            <h1>A Minecraft mod to take full and automated control of your appliances</h1>
+            <p class="intro">Build networks that read values from the world, reason about them, and act on them. A mix of bundled redstone, logic gates and storage-style networks, with hooks into most other mods.</p>
+            <div class="cta">
+                <a class="button button-primary" href="https://www.curseforge.com/minecraft/mc-mods/integrated-dynamics/files" data-download-link>
+                    <span data-download-label>Download on CurseForge</span>
+                </a>
+                <a class="button button-secondary" href="https://integrateddynamics.rubensworks.net/book/">
+                    <img class="pixel" src="/book/assets/icon/integrateddynamics__on_the_dynamics_of_integration.png" alt="" width="24" height="24">
+                    Read the book
+                </a>
+            </div>
+            <p class="release" data-release>The in-game guide, <em>On the Dynamics of Integration</em>, is also readable online.</p>
+            <p class="requires">Requires the <a href="https://www.curseforge.com/minecraft/mc-mods/cyclops-core">Cyclops Core</a> and <a href="https://www.curseforge.com/minecraft/mc-mods/common-capabilities">Common Capabilities</a> libraries.</p>
+        </section>
 
-		<iframe src="https://www.cfwidget.com/minecraft/mc-mods/integrated-dynamics" width="100%" style="border: none;"></iframe>
-		<h2>Addons</h2>
-		<iframe src="https://www.cfwidget.com/minecraft/mc-mods/integrated-tunnels" width="100%" style="border: none;"></iframe>
-		<iframe src="https://www.cfwidget.com/minecraft/mc-mods/integrated-terminals" width="100%" style="border: none;"></iframe>
-		<iframe src="https://www.cfwidget.com/minecraft/mc-mods/integrated-crafting" width="100%" style="border: none;"></iframe>
-		<iframe src="https://www.cfwidget.com/minecraft/mc-mods/integrated-rest" width="100%" style="border: none;"></iframe>
-	</main>
+        <div class="sheet-outer">
+        <div class="sheet">
+        <section>
+            <h2>What it does</h2>
+            <hr class="ornament">
+            <ul class="features">
+            <li>
+                <img class="pixel" src="/book/assets/icon/integrateddynamics__part_redstone_reader.png" alt="" width="48" height="48">
+                <div>
+                    <h3>Readers and writers</h3>
+                    <p>Parts on a cable network read values from the world and write them back: redstone, inventories, fluids, machines, entities and more.</p>
+                </div>
+            </li>
+            <li>
+                <img class="pixel" src="/book/assets/icon/integrateddynamics__logic_programmer.png" alt="" width="48" height="48">
+                <div>
+                    <h3>Logic Programmer</h3>
+                    <p>Combine values with hundreds of operators, from arithmetic and comparison to map, filter and reduce, and use recipes as first-class values.</p>
+                </div>
+            </li>
+            <li>
+                <img class="pixel" src="/book/assets/icon/integrateddynamics__part_display_panel.png" alt="" width="48" height="48">
+                <div>
+                    <h3>Variables on the network</h3>
+                    <p>Store values on variable cards, show them on display panels, delay them, or proxy them anywhere on the network.</p>
+                </div>
+            </li>
+            <li>
+                <img class="pixel" src="/book/assets/icon/integrateddynamics__cable.png" alt="" width="48" height="48">
+                <div>
+                    <h3>Built for integration</h3>
+                    <p>One network reaches the machines and inventories of other mods. Addons add item transfer, autocrafting, terminals and scripting.</p>
+                </div>
+            </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Downloads</h2>
+            <hr class="ornament">
+            <ul class="cards">
+                <li class="card card-featured" data-project="integrated-dynamics">
+                    <div class="card-head">
+                        <img class="pixel" src="/book/assets/icon/integrateddynamics__cable.png" alt="" width="48" height="48">
+                        <h3><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-dynamics">Integrated Dynamics</a></h3>
+                    </div>
+                    <div class="meta" data-meta>All versions and changelogs are on CurseForge.</div>
+                    <div class="actions">
+                        <a class="button-small" href="https://www.curseforge.com/minecraft/mc-mods/integrated-dynamics/files" data-download-link><span data-download-label>Download</span></a>
+                        <a class="button-small ghost" href="https://www.curseforge.com/minecraft/mc-mods/integrated-dynamics/files">All files</a>
+                    </div>
+                    <ul class="versions" data-versions aria-label="Minecraft versions"></ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Addons</h2>
+            <hr class="ornament">
+            <ul class="cards">
+            <li class="card" data-project="integrated-tunnels">
+                <div class="card-head">
+                    <h3><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-tunnels">Integrated Tunnels</a></h3>
+                </div>
+                <p>Transfer items, fluids and energy over the network.</p>
+                <div class="meta" data-meta>On CurseForge</div>
+            </li>
+            <li class="card" data-project="integrated-crafting">
+                <div class="card-head">
+                    <h3><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-crafting">Integrated Crafting</a></h3>
+                </div>
+                <p>Autocrafting driven by network logic.</p>
+                <div class="meta" data-meta>On CurseForge</div>
+            </li>
+            <li class="card" data-project="integrated-terminals">
+                <div class="card-head">
+                    <h3><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-terminals">Integrated Terminals</a></h3>
+                </div>
+                <p>Overview and control the network from one screen.</p>
+                <div class="meta" data-meta>On CurseForge</div>
+            </li>
+            <li class="card" data-project="integrated-scripting">
+                <div class="card-head">
+                    <h3><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-scripting">Integrated Scripting</a></h3>
+                </div>
+                <p>Write scripts for operations too complex for cards.</p>
+                <div class="meta" data-meta>On CurseForge</div>
+            </li>
+            <li class="card" data-project="integrated-nbt">
+                <div class="card-head">
+                    <h3><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-nbt">Integrated NBT</a></h3>
+                </div>
+                <p>Pull values out of deeply nested NBT data.</p>
+                <div class="meta" data-meta>On CurseForge</div>
+            </li>
+            <li class="card" data-project="integrated-rest">
+                <div class="card-head">
+                    <h3><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-rest">Integrated REST</a></h3>
+                </div>
+                <p>Talk to networks over HTTP, for the adventurous.</p>
+                <div class="meta" data-meta>On CurseForge</div>
+            </li>
+            <li class="card" data-project="integrated-mekanism">
+                <div class="card-head">
+                    <h3><a href="https://www.curseforge.com/minecraft/mc-mods/integrated-mekanism">Integrated Mekanism</a></h3>
+                </div>
+                <p>Deep integration with Mekanism machines.</p>
+                <div class="meta" data-meta>On CurseForge</div>
+            </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Community</h2>
+            <hr class="ornament">
+            <ul class="community">
+                <li><a href="https://discord.gg/9yDxubB"><strong>Discord</strong><span>Questions, help and showing off builds, on the Cyclops server.</span></a></li>
+                <li><a href="https://github.com/CyclopsMC/IntegratedDynamics/issues"><strong>Issues</strong><span>Bug reports and feature requests, on GitHub.</span></a></li>
+                <li><a href="https://github.com/CyclopsMC/IntegratedDynamics"><strong>Source</strong><span>The mod is open source. Contributions are welcome.</span></a></li>
+                <li><a href="https://patreon.com/kroeser"><strong>Patreon</strong><span>Support the development of the Cyclops mods.</span></a></li>
+            </ul>
+        </section>
+        </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Integrated Dynamics is made by <a href="https://www.rubensworks.net/">Ruben Taelman</a>.
+        See also <a href="https://evilcraft.rubensworks.net/">EvilCraft</a>, from the same author.</p>
+    </footer>
+
+    <script>
+(function () {
+    var API = 'https://api.cfwidget.com/minecraft/mc-mods/';
+
+    function text(el, value) { if (el) el.textContent = value; }
+
+    function date(iso) {
+        try {
+            return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        } catch (e) { return iso.slice(0, 10); }
+    }
+
+    function count(n) {
+        if (n >= 1e6) return (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + 'M';
+        if (n >= 1e3) return Math.round(n / 1e3) + 'K';
+        return String(n);
+    }
+
+    function badge(type) {
+        if (type === 'release') return '';
+        return ' <span class="badge">' + type + '</span>';
+    }
+
+    // Minecraft versions, newest first.
+    function versions(map) {
+        return Object.keys(map)
+            .filter(function (v) { return /^\d+(\.\d+)+$/.test(v); })
+            .sort(function (a, b) {
+                var x = a.split('.').map(Number), y = b.split('.').map(Number);
+                for (var i = 0; i < Math.max(x.length, y.length); i++) {
+                    var d = (y[i] || 0) - (x[i] || 0);
+                    if (d) return d;
+                }
+                return 0;
+            });
+    }
+
+    // The file to offer: from the newest Minecraft version, its latest release,
+    // or its latest beta or alpha when that version has no release yet.
+    function pick(data) {
+        var all = versions(data.versions || {});
+        for (var i = 0; i < all.length; i++) {
+            var files = (data.versions[all[i]] || []).slice().sort(function (a, b) {
+                return a.uploaded_at < b.uploaded_at ? 1 : -1;
+            });
+            if (!files.length) continue;
+            var release = files.filter(function (f) { return f.type === 'release'; })[0];
+            return release || files[0];
+        }
+        return data.download || {};
+    }
+
+    function fill(root, data) {
+        var dl = pick(data);
+        var total = data.downloads && data.downloads.total;
+
+        root.querySelectorAll('[data-download-link]').forEach(function (a) {
+            if (dl.url) a.href = dl.url;
+        });
+        root.querySelectorAll('[data-download-label]').forEach(function (el) {
+            if (dl.version) el.textContent = 'Download for Minecraft ' + dl.version;
+        });
+        root.querySelectorAll('[data-release]').forEach(function (el) {
+            if (!dl.display) return;
+            el.innerHTML = '<a href="' + dl.url + '">' + dl.display + '</a>' + badge(dl.type) +
+                ' &middot; uploaded ' + date(dl.uploaded_at) +
+                (total ? ' &middot; ' + total.toLocaleString() + ' downloads in total' : '');
+        });
+        root.querySelectorAll('[data-meta]').forEach(function (el) {
+            if (!dl.version) return;
+            el.innerHTML = 'Latest for Minecraft ' + dl.version + badge(dl.type) +
+                ' &middot; ' + date(dl.uploaded_at) +
+                (total ? ' &middot; ' + count(total) + ' downloads' : '');
+        });
+        root.querySelectorAll('[data-versions]').forEach(function (ul) {
+            var all = versions(data.versions || {});
+            var shown = all.slice(0, 8);
+            ul.innerHTML = '<li class="label">Minecraft</li>' +
+                shown.map(function (v) { return '<li>' + v + '</li>'; }).join('') +
+                (all.length > shown.length ? '<li class="more">+' + (all.length - shown.length) + ' older</li>' : '');
+        });
+    }
+
+    // One request per project, however many places on the page show it.
+    var projects = {};
+    function project(slug) {
+        if (!projects[slug]) {
+            projects[slug] = fetch(API + slug)
+                .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); });
+        }
+        return projects[slug];
+    }
+
+    document.querySelectorAll('[data-project]').forEach(function (root) {
+        project(root.getAttribute('data-project'))
+            .then(function (data) { fill(root, data); })
+            .catch(function () { /* the static content stays */ });
+    });
+})();
+    </script>
 </body>
 </html>
